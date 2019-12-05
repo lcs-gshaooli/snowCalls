@@ -30,53 +30,57 @@ class ViewController: UIViewController {
         // Input
         // inputInfo.text = ""
         
+        // Clear
+        
         // guard if no imput is provide
         guard let input = inputInfo.text, input.count > 0 else {
             outputPhone.text = "Please enter phone numbers to convert"
             return
         }
         
-        // Variable
-        var outputPhone = ""
-        if outputPhone.count < 10 {
+        // 2. Process and output
+        
+        // Split given list of numbers into individual lines
+        let phoneNumbers = input.split(separator: "\n")
+        
+        for phoneNumber in phoneNumbers {
+            print(phoneNumber)
+            
+            // Traslated phone number Variable
+            var phone = ""
             
             for charcater in input {
-                
-                switch charcater {
-                case "1":
-                    outputPhone += "1"
-                case "2", "A", "a", "B", "b", "C", "c":
-                    outputPhone += "2"
-                case "3", "D", "d", "E", "e", "F", "f":
-                    outputPhone += "3"
-                case "4", "G","g", "H", "h", "I", "i":
-                    outputPhone += "4"
-                case "5", "J", "j", "K", "k", "L", "l":
-                    outputPhone += "5"
-                case "6", "M", "m", "N", "n", "O", "o":
-                    outputPhone +=  "6"
-                case "7", "P", "p", "Q", "q", "R", "r", "S", "s":
-                    outputPhone += "7"
-                case "8", "T", "t", "U", "u", "V", "v" :
-                    outputPhone += "8"
-                case "9", "W", "w", "X", "x", "Y", "y", "Z", "z":
-                    outputPhone += "9"
-                case "0":
-                    outputPhone += "0"
-                case "\n":
-                    outputPhone += "\n"
-                default: outputPhone = ""
-                    break
-                }
-                
-                if outputPhone.count == 3 || outputPhone.count == 7 {
-                    outputPhone += "-"
+                                    
+                    switch charcater {
+                    case "2", "A", "a", "B", "b", "C", "c":
+                        phone += "2"
+                    case "3", "D", "d", "E", "e", "F", "f":
+                        phone += "3"
+                    case "4", "G","g", "H", "h", "I", "i":
+                        phone += "4"
+                    case "5", "J", "j", "K", "k", "L", "l":
+                        phone += "5"
+                    case "6", "M", "m", "N", "n", "O", "o":
+                        phone +=  "6"
+                    case "7", "P", "p", "Q", "q", "R", "r", "S", "s":
+                        phone += "7"
+                    case "8", "T", "t", "U", "u", "V", "v" :
+                        phone += "8"
+                    case "9", "W", "w", "X", "x", "Y", "y", "Z", "z":
+                        phone += "9"
+                    case "-":
+                        phone += ""
+                    default:
+                        phone += String(charcater)
+                        
+                    }
+                    // Add dash
+                    if phone.count == 3 || phone.count == 7 {
+                        phone += "-"
                     }
                     
                 }
                 
-                print(outputPhone)
-                
             }
         }
-}
+    }
