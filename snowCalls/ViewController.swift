@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextViewDelegate {
+    
     // MARK:
     //Outlets
     @IBOutlet weak var inputInfo: UITextView!
@@ -22,6 +23,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // Do any additional setup after loading the view.
+               
+               // Give the focus to the input textview when the program begins
+               inputInfo.becomeFirstResponder()
+               
+               // Make this class (the view controller) be the delegate for the input text view
+               inputInfo.delegate = self
+
     }
     
     // add button
@@ -43,44 +53,60 @@ class ViewController: UIViewController {
         // Split given list of numbers into individual lines
         let phoneNumbers = input.split(separator: "\n")
         
+        // Loop over each line
         for phoneNumber in phoneNumbers {
             print(phoneNumber)
             
             // Traslated phone number Variable
-            var phone = ""
+            var outputPhoneNumber = ""
             
-            for charcater in input {
-                                    
-                    switch charcater {
-                    case "2", "A", "a", "B", "b", "C", "c":
-                        phone += "2"
-                    case "3", "D", "d", "E", "e", "F", "f":
-                        phone += "3"
-                    case "4", "G","g", "H", "h", "I", "i":
-                        phone += "4"
-                    case "5", "J", "j", "K", "k", "L", "l":
-                        phone += "5"
-                    case "6", "M", "m", "N", "n", "O", "o":
-                        phone +=  "6"
-                    case "7", "P", "p", "Q", "q", "R", "r", "S", "s":
-                        phone += "7"
-                    case "8", "T", "t", "U", "u", "V", "v" :
-                        phone += "8"
-                    case "9", "W", "w", "X", "x", "Y", "y", "Z", "z":
-                        phone += "9"
-                    case "-":
-                        phone += ""
-                    default:
-                        phone += String(charcater)
-                        
-                    }
-                    // Add dash
-                    if phone.count == 3 || phone.count == 7 {
-                        phone += "-"
-                    }
+            // Loop over each character in this phone number
+            for charcater in phoneNumber {
+                
+                switch charcater {
+                case "2", "A", "a", "B", "b", "C", "c":
+                    outputPhoneNumber += "2"
+                case "3", "D", "d", "E", "e", "F", "f":
+                    outputPhoneNumber += "3"
+                case "4", "G","g", "H", "h", "I", "i":
+                    outputPhoneNumber += "4"
+                case "5", "J", "j", "K", "k", "L", "l":
+                    outputPhoneNumber += "5"
+                case "6", "M", "m", "N", "n", "O", "o":
+                    outputPhoneNumber +=  "6"
+                case "7", "P", "p", "Q", "q", "R", "r", "S", "s":
+                    outputPhoneNumber += "7"
+                case "8", "T", "t", "U", "u", "V", "v" :
+                    outputPhoneNumber += "8"
+                case "9", "W", "w", "X", "x", "Y", "y", "Z", "z":
+                    outputPhoneNumber += "9"
+                case "-":
+                    outputPhoneNumber += ""
+                default:
+                    outputPhoneNumber += String(charcater)
                     
+                }
+                // Add dash
+                if outputPhoneNumber.count == 3 || outputPhoneNumber.count == 7 {
+                    outputPhoneNumber += "-"
                 }
                 
             }
+            
+            // print the output phone number
+            print(outputPhoneNumber)
+            outputPhone.text += outputPhoneNumber + "\n"
+            
+            // Called when the contents of the text view are changed.
+            func textViewDidChange(_ textView: UITextView) {
+                // Reset the output text view
+                outputPhone.text = ""
+                // Give the foucous to the input textView when the program begins
+                inputInfo.text = ""
+                outputPhoneNumber = ""
+                inputInfo.becomeFirstResponder()// Se focous on input field
+            
         }
     }
+}
+}
