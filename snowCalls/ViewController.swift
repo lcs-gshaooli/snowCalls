@@ -25,13 +25,13 @@ class ViewController: UIViewController, UITextViewDelegate {
         // Do any additional setup after loading the view.
         
         // Do any additional setup after loading the view.
-               
-               // Give the focus to the input textview when the program begins
-               inputInfo.becomeFirstResponder()
-               
-               // Make this class (the view controller) be the delegate for the input text view
-               inputInfo.delegate = self
-
+        
+        // Give the focus to the input textview when the program begins
+        inputInfo.becomeFirstResponder()
+        
+        // Make this class (the view controller) be the delegate for the input text view
+        inputInfo.delegate = self
+        
     }
     
     // add button
@@ -90,23 +90,27 @@ class ViewController: UIViewController, UITextViewDelegate {
                 if outputPhoneNumber.count == 3 || outputPhoneNumber.count == 7 {
                     outputPhoneNumber += "-"
                 }
+                //stop translating after 12 characters
+                if outputPhoneNumber.count == 12 {
+                    //stop the loop
+                    break
+                }
                 
+                // print the output phone number
+                print(outputPhoneNumber)
+                outputPhone.text += outputPhoneNumber + "\n"
+                
+                // Called when the contents of the text view are changed.
+                func textViewDidChange(_ textView: UITextView) {
+                    // Reset the output text view
+                    outputPhone.text = ""
+                    // Give the foucous to the input textView when the program begins
+                    inputInfo.text = ""
+                    outputPhoneNumber = ""
+                    inputInfo.becomeFirstResponder()// Se focous on input field
+                    
+                }
             }
-            
-            // print the output phone number
-            print(outputPhoneNumber)
-            outputPhone.text += outputPhoneNumber + "\n"
-            
-            // Called when the contents of the text view are changed.
-            func textViewDidChange(_ textView: UITextView) {
-                // Reset the output text view
-                outputPhone.text = ""
-                // Give the foucous to the input textView when the program begins
-                inputInfo.text = ""
-                outputPhoneNumber = ""
-                inputInfo.becomeFirstResponder()// Se focous on input field
-            
         }
-    }
 }
 }
